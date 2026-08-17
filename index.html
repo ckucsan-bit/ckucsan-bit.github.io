@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ENGINEER — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ============================================================
+   EDIT-ME MAP
+   1. YOUR NAME / TITLE            -> search "YOUR NAME"
+   2. HERO TEXT                    -> search "HERO COPY"
+   3. PROJECTS                     -> edit the PROJECTS array in <script> below
+   4. ABOUT TEXT                   -> search "ABOUT COPY"
+   5. CONTACT LINKS                -> search "CONTACT LINKS"
+   6. ACCENT COLOR (orange)        -> change --orange variable below
+   ============================================================ */
+
+:root{
+  --ink:#14181B;
+  --paper:#ECEAE3;
+  --paper-dim:#DFDCD2;
+  --blue:#2F5D8A;
+  --orange:#D9531E;
+  --line:#B9B6AC;
+  --line-soft:#D3D0C6;
+  --mono:'IBM Plex Mono', monospace;
+  --sans:'IBM Plex Sans', sans-serif;
+  --display:'Space Grotesk', sans-serif;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+html{scroll-behavior:smooth;}
+
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:16px;
+  line-height:1.5;
+  background-image:
+    linear-gradient(var(--line-soft) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+  background-size:32px 32px;
+}
+
+a{color:inherit;text-decoration:none;}
+
+img{max-width:100%;display:block;}
+
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px;}
+
+/* ---------- focus visibility ---------- */
+a:focus-visible, button:focus-visible{
+  outline:2px solid var(--orange);
+  outline-offset:3px;
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}
+}
+
+/* ---------- title-block header ---------- */
+header{
+  border-bottom:2px solid var(--ink);
+  background:var(--paper);
+  position:sticky;
+  top:0;
+  z-index:40;
+}
+.header-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:18px 0;
+  flex-wrap:wrap;
+  gap:14px;
+}
+.brand{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:1.15rem;
+  letter-spacing:0.02em;
+  display:flex;
+  align-items:baseline;
+  gap:10px;
+}
+.brand small{
+  font-family:var(--mono);
+  font-size:0.62rem;
+  font-weight:400;
+  color:var(--blue);
+  letter-spacing:0.08em;
+}
+nav{display:flex;gap:26px;}
+nav a{
+  font-family:var(--mono);
+  font-size:0.72rem;
+  letter-spacing:0.09em;
+  text-transform:uppercase;
+  padding-bottom:2px;
+  border-bottom:1px solid transparent;
+  transition:border-color .15s ease, color .15s ease;
+}
+nav a:hover{border-bottom-color:var(--orange); color:var(--orange);}
+
+/* ---------- hero ---------- */
+.hero{
+  padding:96px 0 72px;
+  border-bottom:1px solid var(--line);
+  position:relative;
+}
+.eyebrow{
+  font-family:var(--mono);
+  font-size:0.72rem;
+  letter-spacing:0.14em;
+  color:var(--blue);
+  text-transform:uppercase;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:22px;
+}
+.eyebrow::before{
+  content:'';
+  width:26px;
+  height:1px;
+  background:var(--blue);
+  display:inline-block;
+}
+.hero h1{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:clamp(2.4rem, 5.4vw, 4.6rem);
+  line-height:1.03;
+  letter-spacing:-0.01em;
+  max-width:16ch;
+}
+.hero h1 em{
+  font-style:normal;
+  color:var(--orange);
+}
+.hero p.lede{
+  margin-top:26px;
+  max-width:56ch;
+  font-size:1.08rem;
+  color:#3a3f43;
+}
+.hero-meta{
+  margin-top:46px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(140px,1fr));
+  border-top:1px solid var(--line);
+  border-left:1px solid var(--line);
+  max-width:720px;
+}
+.hero-meta div{
+  border-right:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  padding:14px 16px;
+}
+.hero-meta .k{
+  font-family:var(--mono);
+  font-size:0.62rem;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:#6b6f66;
+  margin-bottom:6px;
+}
+.hero-meta .v{
+  font-family:var(--display);
+  font-weight:600;
+  font-size:1.05rem;
+}
+
+/* ---------- section labels ---------- */
+.section-head{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:20px;
+  padding:56px 0 30px;
+  flex-wrap:wrap;
+}
+.section-head h2{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:1.8rem;
+}
+.section-num{
+  font-family:var(--mono);
+  font-size:0.72rem;
+  color:var(--blue);
+  letter-spacing:0.1em;
+}
+
+/* ---------- project grid ---------- */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
+  gap:28px;
+  padding-bottom:80px;
+}
+.card{
+  background:var(--paper);
+  border:1px solid var(--ink);
+  cursor:pointer;
+  display:flex;
+  flex-direction:column;
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+.card:hover, .card:focus-visible{
+  transform:translate(-3px,-3px);
+  box-shadow:5px 5px 0 var(--ink);
+}
+.card-media{
+  aspect-ratio:4/3;
+  background:var(--paper-dim);
+  position:relative;
+  overflow:hidden;
+  border-bottom:1px solid var(--ink);
+}
+.card-media img{
+  width:100%;height:100%;object-fit:cover;
+}
+.card-media .ph{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);
+  font-size:0.68rem;
+  color:#8b8c82;
+  text-align:center;
+  padding:14px;
+  letter-spacing:0.05em;
+}
+.tag-corner{
+  position:absolute;top:0;right:0;
+  background:var(--ink);
+  color:var(--paper);
+  font-family:var(--mono);
+  font-size:0.6rem;
+  letter-spacing:0.06em;
+  padding:4px 9px;
+}
+.card-body{padding:18px 18px 16px;flex:1;display:flex;flex-direction:column;}
+.card-body h3{
+  font-family:var(--display);
+  font-weight:600;
+  font-size:1.15rem;
+  margin-bottom:8px;
+}
+.card-body p{
+  font-size:0.9rem;
+  color:#4a4e46;
+  flex:1;
+}
+.spec-row{
+  display:flex;
+  gap:16px;
+  margin-top:16px;
+  padding-top:12px;
+  border-top:1px dashed var(--line);
+  flex-wrap:wrap;
+}
+.spec-row div{font-family:var(--mono); font-size:0.64rem; color:#6b6f66;}
+.spec-row span{display:block; color:var(--ink); font-size:0.72rem; margin-top:2px;}
+
+/* ---------- about ---------- */
+.about{
+  border-top:1px solid var(--line);
+  padding:60px 0 80px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:50px;
+}
+@media (max-width:760px){ .about{grid-template-columns:1fr;} }
+.about p{max-width:60ch; color:#3a3f43; margin-bottom:16px;}
+.about .skills{
+  font-family:var(--mono);
+  font-size:0.75rem;
+}
+.about .skills h4{
+  font-family:var(--mono);
+  font-size:0.66rem;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--blue);
+  margin-bottom:12px;
+}
+.skill-list{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:24px;}
+.skill-list span{
+  border:1px solid var(--ink);
+  padding:5px 10px;
+}
+
+/* ---------- footer / contact title block ---------- */
+footer{
+  border-top:2px solid var(--ink);
+  background:var(--ink);
+  color:var(--paper);
+  padding:50px 0 30px;
+}
+footer h2{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:2.1rem;
+  margin-bottom:18px;
+}
+.contact-links{display:flex; gap:26px; flex-wrap:wrap; margin-bottom:40px;}
+.contact-links a{
+  font-family:var(--mono);
+  font-size:0.85rem;
+  border-bottom:1px solid var(--paper);
+  padding-bottom:2px;
+}
+.contact-links a:hover{color:var(--orange); border-color:var(--orange);}
+.title-block{
+  border-top:1px solid #454b4f;
+  padding-top:18px;
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:10px;
+  font-family:var(--mono);
+  font-size:0.62rem;
+  letter-spacing:0.06em;
+  color:#9aa0a4;
+  text-transform:uppercase;
+}
+
+/* ---------- modal ---------- */
+.modal-overlay{
+  position:fixed; inset:0;
+  background:rgba(20,24,27,0.88);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:100;
+  padding:24px;
+}
+.modal-overlay.open{display:flex;}
+.modal{
+  background:var(--paper);
+  max-width:820px;
+  width:100%;
+  max-height:88vh;
+  overflow-y:auto;
+  border:2px solid var(--ink);
+}
+.modal-media{
+  aspect-ratio:16/10;
+  background:var(--paper-dim);
+  display:flex;align-items:center;justify-content:center;
+  border-bottom:1px solid var(--ink);
+  position:relative;
+}
+.modal-media img{width:100%;height:100%;object-fit:cover;}
+.modal-media .ph{font-family:var(--mono); font-size:0.75rem; color:#8b8c82;}
+.modal-body{padding:30px;}
+.modal-body h3{font-family:var(--display); font-size:1.6rem; margin-bottom:10px;}
+.modal-body p{color:#3a3f43; margin-bottom:20px;}
+.modal-close{
+  position:absolute; top:14px; right:14px;
+  background:var(--ink); color:var(--paper);
+  border:none; width:32px; height:32px;
+  font-family:var(--mono); font-size:1rem;
+  cursor:pointer;
+  z-index:2;
+}
+.modal-spec{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+  border-top:1px solid var(--line);
+  border-left:1px solid var(--line);
+}
+.modal-spec div{
+  border-right:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  padding:12px 14px;
+}
+.modal-spec .k{font-family:var(--mono); font-size:0.6rem; text-transform:uppercase; color:#6b6f66; letter-spacing:0.06em;}
+.modal-spec .v{font-family:var(--display); font-weight:600; margin-top:4px;}
+
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap header-inner">
+    <div class="brand">Colton Kucsan<small>PRODUCT DEVELOPMENT ENGINEER — REV 01</small></div>
+    <nav>
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Portfolio / Prototyping &amp; Fabrication</div>
+    <h1>I design things, <em>then I break them</em> until they work.</h1>
+    <p class="lede"><!-- HERO COPY: replace with your own one-line pitch -->
+      A collection of prototypes, 3D prints, and finished builds — from first pass
+      to final revision.
+    </p>
+    <div class="hero-meta">
+      <div><div class="k">Projects</div><div class="v">07</div></div>
+      <div><div class="k">Print hours logged</div><div class="v">750+</div></div>
+      <div><div class="k">Primary tools</div><div class="v">CAD/FDM</div></div>
+      <div><div class="k">Based in</div><div class="v">Pennsylvania</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="work" class="wrap">
+  <div class="section-head">
+    <h2>Selected Work</h2>
+    <div class="section-num">§ 01 — CLICK A CARD FOR DETAIL</div>
+  </div>
+  <div class="grid" id="project-grid"></div>
+</section>
+
+<section id="about" class="wrap about">
+  <div>
+    <div class="eyebrow" style="margin-bottom:14px;">About</div>
+    <!-- ABOUT COPY: replace with your background/story -->
+    <p>I am a master's level mechanical engineer with strong mechanical aptitude, design skills, 
+      and project management experience specializing in new product development and innovation.</p>
+    <p>I like to bring a learners mindset to everything that I do. I reinforce my studies and work experience
+      by pursuing my automotive passion in my free time. I truly love creating custom designs that perfectly suit 
+      a project's needs, whether that be for a customer, a friend or family member, or my 1969 Chevrolet C/10.</p>
+  </div>
+  <div class="skills">
+    <h4>CAD</h4>
+    <div class="skill-list">
+      <span>SolidWorks</span><span>PTC Creo Parametric</span><span>AutoCAD</span>
+    </div>
+    <h4>Design</h4>
+    <div class="skill-list">
+      <span>Design Controls</span><span>Rapid Prototyping</span><span>DFM</span>
+    </div>
+    <h4>Fabrication</h4>
+    <div class="skill-list">
+      <span>FDM / SLA Printing</span><span>Sheet Metal</span><span>Welding</span>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <h2>Let's build something.</h2>
+    <div class="contact-links">
+      <!-- CONTACT LINKS: swap in real ones -->
+      <a href="mailto:ckucsan@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/coltonckucsan/">LinkedIn</a>
+      <a href="Kucsan, Colton - Resume 2026.pdf">Résumé (PDF)</a>
+    </div>
+    <div class="title-block">
+      <span>Drawn by: Colton Kucsan</span>
+      <span>Scale: N/A</span>
+      <span>Sheet 1 of 1</span>
+      <span id="year-stamp">&copy; 2026</span>
+    </div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <div class="modal-media" id="modal-media">
+      <button class="modal-close" id="modal-close" aria-label="Close">&times;</button>
+    </div>
+    <div class="modal-body">
+      <h3 id="modal-title"></h3>
+      <p id="modal-desc"></p>
+      <div class="modal-spec" id="modal-spec"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   PROJECTS — edit this array with your own work.
+   image: path to your photo (e.g. "images/project1.jpg").
+          Leave as "" to show a placeholder box instead.
+   tag:   short corner label, e.g. "FDM", "SLA", "ASSEMBLY"
+   spec:  four short key/value pairs shown on the card + modal
+   ============================================================ */
+const PROJECTS = [
+  {
+    title: "Conductive Tape Dispenser",
+    tag: "Assembly",
+    image: "Stuff I've Worked On/Tape Gun.jpeg",
+    summary: "Single assembly to facilitate conductive taping of two sides of ceiling lift rail.",
+    detail: "Multiple revisions necessary to fit dual taping apparatus on existing carriage assembly. Revisions 1-4 trialed made completely from PLA. Not enough rigidity meant results were inconclusive. Revision 5 was made entirely from stainless steel but tape did not apply in a repeatable fashion. Revision 6 made use of a partially 3D printed assembly, increased tape guide sizing and allowing for reuse of a majority of the stainless steel portion.",
+    spec: { Material: "PLA, Stainless Steel", Iterations: "6", Tools: "SolidWorks, SendCutSend" }
+  },
+  {
+    title: "Heat Exchanger Mounting Brackets",
+    tag: "Sheet Metal",
+    image: "Stuff I've Worked On/C10 HE-10.jpg",
+    summary: "Aluminum brackets meant to mount a heat exchanger to existing radiator support mounts and heat exchanger mounts.",
+    detail: "First revision included only upper brackets that proved to have too little rigidty. Additional lower bracket added to increase stiffness, required two additional holes drilled into bottom of radiator support and provisions taken for accessing hardware. Mounting holes initially modeled into brackets proved too close to bend to be left in without distortion. Parts were ordered without these holes and additional PLA jigs were made to locate where holes were to be drilled.",
+    spec: { Material: "PLA, Al Sheet Metal", Iterations: "2", Tools: "SolidWorks, SendCutSend" }
+  },
+  {
+    title: "Battery Supply Block Off Plate",
+    tag: "FDM · Tough PLA",
+    image: "Stuff I've Worked On/Battery Supply Block-3.jpg",
+    summary: "Anker battery supply block off plate meant to hide any additional buttons or outlets intended to be unused in normal use.",
+    detail: "Locations of buttons and outlets identified and defined using SolidWorks. Test prints made to ensure locations were correct. Multiple iterations were necessary to ensure that design for 12V accessory outlet fit with enough interference to ensure customer would not remove plate by accident.",
+    spec: { Material: "PLA", Iterations: "4", Tools: "SolidWorks" }
+  },
+  {
+    title: "Coil Pack Brackets",
+    tag: "Sheet Metal",
+    image: "Stuff I've Worked On/Coil Pack Brackets-13.jpg",
+    summary: "Coil pack brackets with adjusted angle and location to clear turbocharger and manifold.",
+    detail: "First revision did not have appropriate clearance for coil packs, coil pack on even bank contacted firewall. Mounting clearnaces to clear coil packs adjusted and angle revised to clear firewall.",
+    spec: { Material: "PLA, Al Sheet Metal", Iterations: "2", Tools: "SolidWorks, SendCutSend" }
+  },
+  {
+    title: "Gauge and Brake Fluid Reservoir Mount",
+    tag: "FDM · ABS",
+    image: "Stuff I've Worked On/CB Front Mounts.jpg",
+    summary: "Single bracket used to hold custom gauge and relocate brake fluid reservoir in order to tidy handlebars and allow proper fitment of fairing.",
+    detail: "Many iterations necessary to ensure that gauge, fairing, and brake reservoir did not contact one another. Many revisions were spent solely on getting brake reservoir further under fairing while still allowing for fluid to flow down to the master cylinder and removal of the lid of the reservoir, largely accomplished by clocking reservoir and adapting length and angle of support for reservoir.",
+    spec: { Material: "ABS", Iterations: "13", Tools: "SolidWorks" }
+  },
+  {
+    title: "Throttle Body Spacer",
+    tag: "Machining",
+    image: "Stuff I've Worked On/TB Spacer-11.jpg",
+    summary: "Throttle body spacer to facilitate use of existing intake flange and throttle body while providing clearance between the throttle body and hood.",
+    detail: "Each revision was modified to include a unique combination of an offset in the y-direciton as well as a unique angle until fitment was just right. 3D printed pins were printed with an interference fit to attatch the throttle body to the spacer when testing for clearance. Entire development was completed consulting with the machine shop for feasibility each step of the way.",
+    spec: { Material: "PLA, Aluminum", Iterations: "5", Tools: "SolidWorks, Machining" }
+  },
+  {
+    title: "Honda CB600RR Updated Front Wheel Conversion",
+    tag: "Machining · Sheet Metal",
+    image: "Stuff I've Worked On/CB Front Wheel-2.jpg",
+    summary: "Wheel and rotor spacers to accomodate a 2007+ Honda CBR600RR wheel on a 2005-2006 Honda CBR600RR pair of forks.",
+    detail: "Careful measurement of existing 2005-2006 wheel location and spacer sizing was taken. This was reverse engineered using SolidWorks and fork and brake caliper spacing was determined off of these measurements. Using the 2007+ wheel dimensions, new spacers were modeled to ensure fork and caliper spacing remained the same and axle was not shifted. Four revisions were necessary to get the spacing of the wheel to be correct as well as the rotors to be centered in the calipers. Laser cut rotor spacers were purchased and wheel spacers were machined.",
+    spec: { Material: "PLA, Aluminum, Al Sheet Metal", Iterations: "4", Tools: "SolidWorks, Machining, SendCutSend" }
+  },
+  {
+    title: "Water Reservoir Tank",
+    tag: "Assembly",
+    image: "Stuff I've Worked On/Water Rez-11.jpg",
+    summary: "Water reservoir tank to hold coolant used for air to water intercooling.",
+    detail: "Sizing and tolerance initially created using cardboard templates. Created from multiple sheet metal parts laser cut to ensure proper fit up for welding. Bracket designed to mount to radiator support with the addition of two holes and nutserts. Multiple welded bungs added to facilitate inlet, outlet, breather, and mounting points on the tank. Second revision necessary because top was not clearly identified at weld shop and this caused incorrect welding.",
+    spec: { Material: "Al Sheet Metal", Iterations: "2", Tools: "SolidWorks, SendCutSend" }
+  },
+];
+
+const grid = document.getElementById('project-grid');
+
+PROJECTS.forEach((p, i) => {
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.tabIndex = 0;
+  card.setAttribute('role','button');
+  card.setAttribute('aria-label', 'View details: ' + p.title);
+
+  const specEntries = Object.entries(p.spec).slice(0,2);
+  const specHTML = specEntries.map(([k,v]) => `<div>${k}<span>${v}</span></div>`).join('');
+
+  card.innerHTML = `
+    <div class="card-media">
+      ${p.image ? `<img src="${p.image}" alt="${p.title}">` : `<div class="ph">PHOTO<br>${p.title}</div>`}
+      <div class="tag-corner">${p.tag}</div>
+    </div>
+    <div class="card-body">
+      <h3>${p.title}</h3>
+      <p>${p.summary}</p>
+      <div class="spec-row">${specHTML}</div>
+    </div>
+  `;
+
+  const open = () => openModal(i);
+  card.addEventListener('click', open);
+  card.addEventListener('keydown', e => { if(e.key==='Enter'||e.key===' '){ e.preventDefault(); open(); } });
+
+  grid.appendChild(card);
+});
+
+const overlay = document.getElementById('modal-overlay');
+const modalMedia = document.getElementById('modal-media');
+const modalTitle = document.getElementById('modal-title');
+const modalDesc = document.getElementById('modal-desc');
+const modalSpec = document.getElementById('modal-spec');
+const closeBtn = document.getElementById('modal-close');
+
+function openModal(i){
+  const p = PROJECTS[i];
+  modalMedia.innerHTML = `<button class="modal-close" id="modal-close-inner" aria-label="Close">&times;</button>` +
+    (p.image ? `<img src="${p.image}" alt="${p.title}">` : `<div class="ph">PHOTO — ${p.title}</div>`);
+  modalTitle.textContent = p.title;
+  modalDesc.textContent = p.detail;
+  modalSpec.innerHTML = Object.entries(p.spec).map(([k,v]) =>
+    `<div><div class="k">${k}</div><div class="v">${v}</div></div>`).join('');
+  overlay.classList.add('open');
+  document.getElementById('modal-close-inner').addEventListener('click', closeModal);
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(){
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+closeBtn.addEventListener('click', closeModal);
+overlay.addEventListener('click', e => { if(e.target === overlay) closeModal(); });
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
+
+document.getElementById('year-stamp').textContent = '© ' + new Date().getFullYear();
+</script>
+
+</body>
+</html>
